@@ -30,7 +30,7 @@ jobs:
         
       # Run Cypress
       - name: Run Cypress Component Test
-        run: npm run test:component
+        run: npm run test-component
 
       - name: Run Cypress E2E Test
         run: npm run test
