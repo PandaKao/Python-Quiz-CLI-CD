@@ -31,9 +31,14 @@ jobs:
       # Setup MongoDB_URI with secret
       - name: Set up MongoDB URI
         env:
-          MONGO_URI: ${{ secrets.MONGODB_URI }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
         run: |
           echo "Using MongoDB URI from GitHub Secrets"
+
+      - name: Debug MongoDB URI
+        run: echo "MongoDB URI is $MONGODB_URI"
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
       # Build dist files
       - name: Build server and client
