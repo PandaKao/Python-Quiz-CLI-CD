@@ -35,7 +35,11 @@ jobs:
       # Debugging env
       - name: Debug MongoDB URI
         run: |
-          echo "MongoDB URI is set to: ${MONGODB_URI:0:8}... (masked for safety)"
+          if [ -z "$MONGODB_URI" ]; then
+            echo "MONGODB_URI is not set!"
+          else
+            echo "MONGODB_URI is set."
+          fi
 
       # Build dist files
       - name: Build server and client
