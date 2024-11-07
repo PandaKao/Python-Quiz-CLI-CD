@@ -28,6 +28,10 @@ jobs:
       - name: 🧰 Install Dependencies
         run: npm install
 
+      # Build dist files
+      - name: Build server and client
+        run: npm run build
+
       # Run server before E2E test
       - name: Startup server
         run: npm run start & npx wait-on http://localhost:3001
