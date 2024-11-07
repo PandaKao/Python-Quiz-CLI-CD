@@ -27,10 +27,14 @@ jobs:
       # Install dependencies
       - name: 🧰 Install Dependencies
         run: npm install
+
+      # Run server before E2E test
+      -name: Startup server
+        run: npm run start & npx wait-on http://localhost:3001
         
       # Run Cypress
       - name: Run Cypress Component Test
         run: npm run test-component
-
+      
       - name: Run Cypress E2E Test
         run: npm run test
