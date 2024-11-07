@@ -32,6 +32,11 @@ jobs:
       - name: 🧰 Install Dependencies
         run: npm install
 
+      # Debugging env
+      - name: Debug MongoDB URI
+        run: |
+          echo "MongoDB URI is set to: ${MONGODB_URI:0:8}... (masked for safety)"
+
       # Build dist files
       - name: Build server and client
         run: npm run build
