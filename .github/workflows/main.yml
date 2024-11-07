@@ -28,6 +28,13 @@ jobs:
       - name: 🧰 Install Dependencies
         run: npm install
 
+      # Setup MongoDB_URI with secret
+      - name: Set up MongoDB URI
+        env:
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+        run: |
+          echo "Using MongoDB URI from GitHub Secrets"
+
       # Build dist files
       - name: Build server and client
         run: npm run build
