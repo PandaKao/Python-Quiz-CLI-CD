@@ -41,6 +41,8 @@ jobs:
         run: |
           echo "Starting server with MONGODB_URI: ${MONGODB_URI}"
           MONGODB_URI=${MONGODB_URI} npm run start & npx wait-on http://localhost:3001
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
         
       # Run Cypress
       - name: Run Cypress Component Test
