@@ -5,7 +5,7 @@ name: Cypress Component Tests
 on:
   pull_request:
     branches:
-      - develop
+      - main
 
 # Jobs to carry out
 jobs:
