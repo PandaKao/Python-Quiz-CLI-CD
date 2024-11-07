@@ -13,6 +13,7 @@ jobs:
     # Operating system to run job on
     runs-on: ubuntu-latest
 
+    # Define env secret at job level
     env:
       MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
@@ -31,16 +32,15 @@ jobs:
       - name: 🧰 Install Dependencies
         run: npm install
 
-      - name: Debug MongoDB URI
-        run: echo "MongoDB URI is $MONGODB_URI"
-
       # Build dist files
       - name: Build server and client
         run: npm run build
 
       # Run server before E2E test
       - name: Startup server
-        run: npm run start & npx wait-on http://localhost:3001
+        run: |
+          echo "Starting server with MONGODB_URI: ${MONGODB_URI}"
+          MONGODB_URI=${MONGODB_URI} npm run start & npx wait-on http://localhost:3001
         
       # Run Cypress
       - name: Run Cypress Component Test
