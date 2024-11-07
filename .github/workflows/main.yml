@@ -28,20 +28,17 @@ jobs:
       - name: 🧰 Install Dependencies
         run: npm install
 
-      # Set up MongoDB URI from Environment Variable (instead of Secrets)
+      # Setup MongoDB_URI with secret
       - name: Set up MongoDB URI
-        run: |
-          echo "Using MongoDB URI from Environment Variables"
-          echo "MONGODB_URI=$MONGODB_URI" >> $GITHUB_ENV
         env:
-          MONGODB_URI: ${{ env.MONGODB_URI }}  # or use the repository environment variable here
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+        run: |
+          echo "Using MongoDB URI from GitHub Secrets"
 
-      # Debug MongoDB URI (For troubleshooting)
       - name: Debug MongoDB URI
-        run: |
-          echo "MongoDB URI is $MONGODB_URI"  # This will print the MongoDB URI
+        run: echo "MongoDB URI is $MONGODB_URI"
         env:
-          MONGODB_URI: $MONGODB_URI  # Inject the environment variable into this step
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
       # Build dist files
       - name: Build server and client
