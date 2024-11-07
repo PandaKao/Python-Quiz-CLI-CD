@@ -31,7 +31,7 @@ jobs:
       # Setup MongoDB_URI with secret
       - name: Set up MongoDB URI
         env:
-          MONGO_URI: ${{ secrets.MONGO_URI }}
+          MONGO_URI: ${{ secrets.MONGODB_URI }}
         run: |
           echo "Using MongoDB URI from GitHub Secrets"
 
