@@ -2,7 +2,10 @@
   "name": "coding-quiz",
   "version": "1.0.0",
   "description": "",
-  "scripts": {
+  "engines": {
+    "node": ">=17.0.0"
+  },
+    "scripts": {
     "start": "cd server && npm run start",
     "seed": "cd server && npm run seed",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm run dev\"",
