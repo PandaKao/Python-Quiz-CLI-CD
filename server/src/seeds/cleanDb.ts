@@ -3,10 +3,14 @@ import db from '../config/connection.js';
 
 export default async (modelName: "Question", collectionName: string) => {
   try {
-    if (!models[modelName] || !models[modelName].db) {
+    // Set models[modelName] to `any` to bypass the type checking
+    const model = models[modelName] as any;
+
+    if (!model || !model.db) {
       throw new Error(`Model or database not found for modelName: ${modelName}`);
     }
-    let modelExists = await models[modelName].db.db.listCollections({
+
+    const modelExists = await model.db.db.listCollections({
       name: collectionName
     }).toArray();
 
@@ -16,4 +20,4 @@ export default async (modelName: "Question", collectionName: string) => {
   } catch (err) {
     throw err;
   }
-}
+};
