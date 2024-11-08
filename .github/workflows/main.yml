@@ -12,6 +12,7 @@ jobs:
   test:
     # Operating system to run job on
     runs-on: ubuntu-latest
+    environment: MONGODB_URI
 
     # Define env secret at job level
     env:
