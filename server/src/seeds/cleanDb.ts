@@ -1,14 +1,23 @@
-import Question from "../models/Question.js";
+import models from '../models/index.js';
+import db from '../config/connection.js';
 
-const cleanDB = async (): Promise<void> => {
+export default async (modelName: "Question", collectionName: string) => {
   try {
-    await Question.deleteMany({});
-    console.log('Question collection cleaned.');
+    // Set models[modelName] to `any` to bypass the type checking
+    const model = models[modelName] as any;
 
+    if (!model || !model.db) {
+      throw new Error(`Model or database not found for modelName: ${modelName}`);
+    }
+
+    const modelExists = await model.db.db.listCollections({
+      name: collectionName
+    }).toArray();
+
+    if (modelExists.length) {
+      await db.dropCollection(collectionName);
+    }
   } catch (err) {
-    console.error('Error cleaning', err);
-    process.exit(1);
+    throw err;
   }
 };
-
-export default cleanDB;
