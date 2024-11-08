@@ -16,6 +16,7 @@ jobs:
     # Define env secret at job level
     env:
       MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      TEST_SECRET: ${{ secrets.TEST_SECRET }}
 
     # Steps in job
     steps:
@@ -39,6 +40,15 @@ jobs:
             echo "MONGODB_URI is not set!"
           else
             echo "$MONGODB_URI is set."
+          fi
+
+      # Debugging env
+      - name: Debug MongoDB URI
+        run: |
+          if [ -z "$TEST_SECRET" ]; then
+            echo "TEST_SECRET is not set!"
+          else
+            echo "$TEST_SECRET is set."
           fi
 
       # Build dist files
