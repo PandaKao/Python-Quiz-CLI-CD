@@ -15,7 +15,7 @@ jobs:
 
     # Define env secret at job level
     env:
-      MONGODB_URI: testing
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
     # Steps in job
     steps:
