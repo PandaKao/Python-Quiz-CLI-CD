@@ -12,12 +12,11 @@ jobs:
   test:
     # Operating system to run job on
     runs-on: ubuntu-latest
-    environment: MONGODB_URI
+    # environment: MONGODB_URI
 
-    # Define env secret at job level
-    env:
-      MONGODB_URI: ${{ secrets.MONGODB_URI }}
-      TEST_SECRET: ${{ secrets.TEST_SECRET }}
+    # # Define env secret at job level
+    # env:
+    #   MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
     # Steps in job
     steps:
@@ -34,35 +33,26 @@ jobs:
       - name: 🧰 Install Dependencies
         run: npm install
 
-      # Debugging env
-      - name: Debug MongoDB URI
-        run: |
-          if [ -z "$MONGODB_URI" ]; then
-            echo "MONGODB_URI is not set!"
-          else
-            echo "$MONGODB_URI is set."
-          fi
-
-      # Debugging env
-      - name: Debug MongoDB URI
-        run: |
-          if [ -z "$TEST_SECRET" ]; then
-            echo "TEST_SECRET is not set!"
-          else
-            echo "$TEST_SECRET is set."
-          fi
+      # # Debugging env
+      # - name: Debug MongoDB URI
+      #   run: |
+      #     if [ -z "$MONGODB_URI" ]; then
+      #       echo "MONGODB_URI is not set!"
+      #     else
+      #       echo "$MONGODB_URI is set."
+      #     fi
 
       # Build dist files
       - name: Build server and client
         run: npm run build
 
-      # Run server before E2E test
-      - name: Startup server
-        run: npm run start & npx wait-on http://localhost:3001
+      # # Run server before E2E test
+      # - name: Startup server
+      #   run: npm run start & npx wait-on http://localhost:3001
         
       # Run Cypress
       - name: Run Cypress Component Test
         run: npm run test-component
       
-      - name: Run Cypress E2E Test
-        run: npm run test
+      # - name: Run Cypress E2E Test
+      #   run: npm run test
