@@ -15,7 +15,7 @@ jobs:
 
     # Define env secret at job level
     env:
-      MONGODB_URI: MONGODB_URI
+      MONGODB_URI: testing
 
     # Steps in job
     steps:
